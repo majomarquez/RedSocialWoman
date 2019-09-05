@@ -1,24 +1,20 @@
 import React, {useState, useEffect} from 'react';
+import {connect} from 'react-redux';
 import Search from '../components/Search';
 import Categories from '../components/Categories';
 import Carousel from '../components/Carousel';
 import CarouselItem from '../components/CarouselItem';
-import useinitialState from '../hooks/useTvShowsApi'
-import Layout from '../hooks/useTvShowsApi'
 import '../assets/styles/container/Home.scss';
 
-const API = 'http://localhost:3000/initalState';
 
-const Home = () => {
-
-  const initialState = useinitialState(API);
-  return initialState.length ===0 ? <h1>Loading...</h1> :(
+const Home = ({ myList, trends, originals }) => {
+  return (
       <>
       <Search/>
-      {initialState.mylist.length > 0 && (
+      {myList.length > 0 && (
       <Categories title ="Mi Lista">
         <Carousel>
-          {initialState.mylist.map (item=>
+          {myList.map (item=>
             <CarouselItem key={item.id}{...item}/>
           )}
         </Carousel>
@@ -27,23 +23,23 @@ const Home = () => {
 
       <Categories title ="Buscar un Profesional">
         <Carousel>
-          {initialState.trends.map(item=>
+          {trends.map(item=>
            <CarouselItem key={item.id}{...item}/>
           )}
         </Carousel>
       </Categories>
 
-      <Categories title ="Vitrinear">
+      {/* <Categories title ="Vitrinear">
         <Carousel>
-          {initialState.shop.map(item=>
+          {myList.shoping.map(item=>
             <CarouselItem key={item.id}{...item}/>
           )}
         </Carousel>
-      </Categories>
+      </Categories> */}
 
       <Categories title ="Buscar inspiración">
         <Carousel>
-          {initialState.original.map(item=>
+          {originals.map(item=>
             <CarouselItem key={item.id}{...item}/>
           )}
         </Carousel>
@@ -52,4 +48,11 @@ const Home = () => {
   );
 }
 
-export default Home;
+const mapStateToProps= state=>{
+  return{
+    myList:state.myList,
+    trends:state.trends,
+    originals:state.originals,
+  };
+};
+export default connect (mapStateToProps, null) (Home);
