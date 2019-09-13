@@ -12,9 +12,7 @@ const Register =() =>(
         <input className="input" type="password" placeholder="Contraseña"/>
         <button className="button">Registrarme</button>
       </form>
-      <Link to ='Login'>
-      Iniciar sesión
-      </Link>
+      <Link to ='Login'> Iniciar sesión</Link>
     </section>
   </section>
 );
