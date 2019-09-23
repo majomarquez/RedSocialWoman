@@ -6,8 +6,8 @@ import reducer from './reducers/index';
 import App from './routes/App';
 
 const initialState ={
-    "user":{},
-    "playing":{},
+    "user":{},  //trae la data inicial del usuario
+    "playing":{},  // permitir si se reproduce o no un video
           "myList": [],
           "trends": [
             {
@@ -171,6 +171,7 @@ const initialState ={
           ]
 }
 const store = createStore(reducer, initialState);
+
 ReactDOM.render(
     <Provider store={store}>
         <App/>
